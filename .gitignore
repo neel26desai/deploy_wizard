@@ -1,3 +1,8 @@
 __pycache__/
-terraform_files
+dev/
 iris_model*
+.hcl
+*.tfstate
+*.tfstate.backup
+*.terraform.lock.hcl
+.terraform/

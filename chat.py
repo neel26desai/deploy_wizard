@@ -2,7 +2,7 @@ from talk_ollama import Ollama
 from talk_openai import MyOpenAI
 
 if __name__ == "__main__":
-    model = Ollama(model_name="gemma2:2b")
+    model = MyOpenAI()
     while True:
         user_input = input("You: ")
         if user_input == "exit":
