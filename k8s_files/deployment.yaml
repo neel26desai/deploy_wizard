@@ -1,0 +1,29 @@
+# Deployment for the iris-model application
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris-model
+  labels:
+    app: iris-model
+spec:
+  replicas: 3  # Increased for high availability; adjust based on expected load
+  selector:
+    matchLabels:
+      app: iris-model
+  template:
+    metadata:
+      labels:
+        app: iris-model
+    spec:
+      containers:
+      - name: irismodel-inference
+        image: neel26d/iris_model_inference:latest
+        ports:
+        - containerPort: 8000
+        resources:  # Resource requests and limits for better resource management
+          requests:
+            memory: "64Mi"  # Adjust based on actual usage
+            cpu: "250m"     # Adjust based on actual usage
+          limits:
+            memory: "128Mi" # Adjust based on actual usage
+            cpu: "500m"     # Adjust based on actual usage

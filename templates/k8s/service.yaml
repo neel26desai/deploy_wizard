@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-model-service # Ensure the Service gets a name
+spec:
+  type: LoadBalancer  
+  ports:
+    - port: 80  # The port that the service will expose
+      targetPort: 8000  # Ensure the target port matches the container port
+  selector:
+    app: iris-model #label must consist of lower case alphanumeric characters or '-', and must start and end with an alphanumeric character (e.g. 'my-name',  or '123-abc', regex used for validation is '[a-z0-9]([-a-z0-9]*[a-z0-9])?')

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: iris-model  # Add the name field
+  labels:
+    app: iris-model  # Ensure the labels match the service selector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: iris-model  # Ensure the selector matches the labels, underscores are not allowed
+  template:
+    metadata:
+      labels:
+        app: iris-model  # Ensure the labels match the service selector
+    spec:
+      containers:
+      - name: irismodel-inference  # Add a name for the container
+        image: neel26d/iris_model_inference:latest
+        ports:
+        - containerPort: 8000 # Ensure this matches the target port in the service

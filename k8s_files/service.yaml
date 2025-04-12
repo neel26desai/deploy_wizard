@@ -1,0 +1,13 @@
+# Service for exposing the iris-model application
+apiVersion: v1
+kind: Service
+metadata:
+  name: iris-model-service
+spec:
+  type: LoadBalancer  # Changed to LoadBalancer for production environments
+  ports:
+    - name: http  # Named port for clarity
+      port: 80
+      targetPort: 8000
+  selector:
+    app: iris-model  # Ensure consistency with Deployment labels

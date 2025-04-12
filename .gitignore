@@ -6,3 +6,4 @@ iris_model*
 *.tfstate.backup
 *.terraform.lock.hcl
 .terraform/
+.k8s_files/
