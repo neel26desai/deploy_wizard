@@ -2,6 +2,17 @@ provider "aws" {
   region = var.aws_region
 }
 
+# Fetch the latest Amazon Linux AMI dynamically
+data "aws_ami" "latest_ami" {
+  most_recent = true
+  owners      = ["amazon"]
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-hvm-*-x86_64-gp2"]  # Adjust this filter as needed for the desired AMI
+  }
+}
+
 resource "aws_security_group" "ec2_sg" {
   name_prefix = "${var.resource_prefix}-sg-"
 
@@ -51,11 +62,11 @@ resource "aws_security_group" "ec2_sg" {
 }
 
 resource "aws_instance" "model_server" {
-  ami                    = var.ami_id
-  instance_type         = var.instance_type
-  subnet_id             = var.subnet_id
-  vpc_security_group_ids = [aws_security_group.ec2_sg.id]
-  key_name              = var.key_name
+  ami                    = data.aws_ami.latest_ami.id  # Use dynamic AMI ID fetched by the data source
+  instance_type           = var.instance_type
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids  = [aws_security_group.ec2_sg.id]
+  key_name               = var.key_name
 
   user_data = <<EOF
 #!/bin/bash
