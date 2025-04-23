@@ -58,8 +58,8 @@ from langchain_openai import ChatOpenAI  # Use the updated package
 from langchain.schema import HumanMessage, AIMessage, SystemMessage  # Add this line to import message classes
 
 class MyOpenAI:
-    def __init__(self, model="gpt-4o-mini"):
-        self.llm = ChatOpenAI(model=model, temperature=0)
+    def __init__(self, model="gpt-4o-mini", api_key=None):
+        self.llm = ChatOpenAI(model=model, temperature=0, openai_api_key=api_key)
         self.messages = []
     
     def invoke(self, message):
