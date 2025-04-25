@@ -22,5 +22,7 @@ def get_file_path():
 
 def write_to_file(file_path, content):
     """Write the content to the specified file."""
+    #create the directory if it doesn't exist
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, 'w') as file:
         file.write(content)
