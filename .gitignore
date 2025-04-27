@@ -8,3 +8,4 @@ iris_model*
 .terraform/
 k8s_files/
 aws_terraform_files/
+.env
