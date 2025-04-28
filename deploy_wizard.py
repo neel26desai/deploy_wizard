@@ -1,4 +1,4 @@
-from aws_helper.ec2_deploy_wizard import EC2Deploy
+from aws_helper.ec2_deploy_wizard import DeployEC2
 if __name__=="__main__":
     print("Where would you like to deploy your code?")
     print("1. AWS EC2")
@@ -10,7 +10,7 @@ if __name__=="__main__":
     if input == "1":
         print("You have selected AWS EC2.")
         # Add your AWS EC2 deployment code here
-        ec2_deploy = EC2Deploy()
+        ec2_deploy = DeployEC2()
         ec2_deploy.deploy_ec2()
 
     elif input == "2":
