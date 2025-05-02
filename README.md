@@ -48,7 +48,7 @@ export OPENAI_API_KEY="sk-xxxxxxxxxxxxxxxxxxxxx"
 minikube start
 ```
 ---
-##🧠 How to Use the Deploy Wizard
+## 🧠 How to Use the Deploy Wizard
 
 1. Run the CLI Wizard
 
@@ -57,30 +57,45 @@ python deploy_wizard.py
 ```
 2. Answer the questions in the terminal
    
-<img width="812" alt="Screenshot 2025-04-26 at 5 46 32 PM" src="https://github.com/user-attachments/assets/71977f29-24cd-4442-9f2d-e6969cb20c68" />
 
-3. Actions taken:
+<img width="708" alt="Screenshot 2025-05-02 at 12 24 16 AM" src="https://github.com/user-attachments/assets/e3bb3545-3bf9-431c-bda8-e3141336a12d" />
 
-LLM generates deployment.yaml and service.yaml
+3. 🐳 Docker Commands
 
-Saves YAMLs into the specified folder
-
-Applies them automatically with kubectl
-
-Creates Deployment and Service inside Kubernetes
-
-4. Verify the Deployment
 ```
-kubectl get pods
+docker build -t mansiiv/iris-llm:latest iris_model_inference
 ```
-5.Check services:
+Test locally (optional)
 ```
-kubectl get services
+docker run -p 8000:8000 mansiiv/iris-llm:latest
 ```
+✅ Push to DockerHub
+
+```
+docker push mansiiv/iris-llm:latest
+```
+
 6. Access the Application
 ```
-minikube service your-service-name --url
+minikube service iris-llm-service --url
 ```
+Use /predict with input:
+
+{
+  "sepal_length": 5.1,
+  
+  "sepal_width": 3.5,
+  
+  "petal_length": 1.4,
+  
+  "petal_width": 0.2
+  
+}
+
+You should receive:
+
+{"prediction": 0}
+
 
 
 ⚡ Notes
