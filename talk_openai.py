@@ -4,7 +4,7 @@ from langchain.schema import HumanMessage, AIMessage, SystemMessage
 import os
 
 class MyOpenAI(Talker):
-    FILE_WITH_SECRET = '/Users/neel/Documents/Keys/OpenAIDeployWizardKey.txt'
+    FILE_WITH_SECRET = '/Users/mansivekariya/Documents/Keys/MyOpenAIKey.txt'
     
     def __init__(self, model="gpt-4o-mini"):
         os.environ["OPENAI_API_KEY"] = self.read_openai_key()
