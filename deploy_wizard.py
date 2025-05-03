@@ -1,4 +1,6 @@
 from aws_helper.ec2_deploy_wizard import DeployEC2
+from aws_helper.sagemaker_endpoint import DeploySagemakerEndpoint
+
 if __name__=="__main__":
     print("Where would you like to deploy your code?")
     print("1. AWS EC2")
@@ -21,6 +23,8 @@ if __name__=="__main__":
         # Add your Print Kubernetes deployment code here
     elif input == "4":
         print("You have selected AWS SageMaker.")
+        aws_sagemaker = DeploySagemakerEndpoint()
+        aws_sagemaker.deploy_to_sagemaker()
         # Add your AWS SageMaker deployment code here
     elif input == "5":
         print("You have selected Azure ML.")

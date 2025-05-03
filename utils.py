@@ -1,4 +1,7 @@
 import os
+import subprocess
+import sys
+
 def read_openai_key(file_path):
     try:
         with open(file_path, 'r') as file:
@@ -14,6 +17,26 @@ def file_reader(input_file):
             return file.read()
     except Exception as e:
         raise Exception(f"Error reading file: {str(e)}")
+
+#get python version
+def get_python_version():
+    try:
+        # Check if python3 is available
+        return subprocess.check_output([sys.executable, '--version']).decode('utf-8').strip()
+    except subprocess.CalledProcessError as e:
+        # python3 is not installed
+        print(f"Error: {e}")
+        return None
+    
+#get all packages installed in the system
+def get_installed_packages():
+    try:
+        # Get the list of installed packages
+        result = subprocess.check_output(['pip', 'freeze']).decode('utf-8').strip()
+        return result
+    except subprocess.CalledProcessError as e:
+        print(f"Error: {e}")
+        return None
 
 def get_file_path():
     """Prompt the user for the training Python file path."""
