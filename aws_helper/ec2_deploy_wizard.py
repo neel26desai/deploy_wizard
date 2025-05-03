@@ -25,7 +25,7 @@ def save_file_tool(file_path: str, content: str) -> str:
     return f"Saved to {file_path}"
 
 class DeployEC2:
-    def __init__(self, small_model="gpt-4o-mini",large_model="gpt-4o",actor_critic_iterations=1):
+    def __init__(self, small_model="gpt-4o-mini",large_model="gpt-4o",actor_critic_iterations=2):
         self.small_model = small_model
         self.large_model = large_model
         self.actor_critic_iterations = actor_critic_iterations
