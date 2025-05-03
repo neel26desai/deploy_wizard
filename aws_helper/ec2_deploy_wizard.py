@@ -38,6 +38,8 @@ class DeployEC2:
         self.terraform_validator_llm = MyOpenAI(model=small_model)
         self.infernce_dir = None
         self.terraform_dir = None
+        self.python_version = get_python_version()
+        self.packages = get_installed_packages()
 
     def get_model_info(self):
         """Ask the user to provide model details and data shape."""
@@ -209,7 +211,9 @@ class DeployEC2:
             - Generate a `requirements.txt` file based on the following libraries used in the script:
              - Also include known libraries which are not in the script but are commonly used for model inference.
             - Ensure the libraries are listed in a format suitable for `pip install`.
-            {libraries_str}"""}
+            {libraries_str}
+            - Python version is {self.python_version}.
+            - To check which version to install refer to the" this list of all installed packages in the environment: {self.packages}"""}
         ]
 
         return self.inference_script_generator_llm.invoke(messages)
@@ -312,6 +316,7 @@ class DeployEC2:
 
             ### Context:
             - **Working Directory**: The Dockerfile is located inside the project directory where the model inference script, requirements file, and model file are also stored.
+            - **Python Version**: {self.python_version}
             - **Inference Script**:
                 - Location (relative to the Dockerfile): `{options['inference_script_path']}`
                 - Contents:
