@@ -345,7 +345,7 @@ class DeploySagemakerEndpoint:
         self.ecr_repo_name = input("Enter the name of the ECR repository: ").strip()
         self.aws_account_id = input("Enter your AWS account ID: ").strip()
         self.aws_region = input("Enter the AWS region for ECR: ").strip()        
-        self.ecr_image_full_name = f"{self.aws_account_id}.dkr.ecr.{self.aws_region}.amazonaws.com/{ecr_repo_name}:latest"
+        self.ecr_image_full_name = f"{self.aws_account_id}.dkr.ecr.{self.aws_region}.amazonaws.com/{self.ecr_repo_name}:latest"
     
     def provide_commmands_to_push_ecr(self):
         self.get_aws_ecr_information()
