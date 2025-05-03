@@ -1,11 +1,13 @@
 from aws_helper.ec2_deploy_wizard import DeployEC2
+from k8s_helper.k8s_deploy_wizard import DeployKubernetes
 from aws_helper.sagemaker_endpoint import DeploySagemakerEndpoint
+
 
 if __name__=="__main__":
     print("Where would you like to deploy your code?")
     print("1. AWS EC2")
     print("2. Azure VM")
-    print("3. Print Kubernetes")
+    print("3. Kubernetes")
     print("4. AWS SageMaker")
     print("5. Azure ML")
     input = input("Please enter the number corresponding to your choice: ")
@@ -19,8 +21,10 @@ if __name__=="__main__":
         print("You have selected Azure VM.")
         # Add your Azure VM deployment code here
     elif input == "3":
-        print("You have selected Print Kubernetes.")
-        # Add your Print Kubernetes deployment code here
+        print("You have selected Kubernetes deployment.")
+        k8s_deploy = DeployKubernetes()
+        k8s_deploy.deploy_kubernetes()
+
     elif input == "4":
         print("You have selected AWS SageMaker.")
         aws_sagemaker = DeploySagemakerEndpoint()
