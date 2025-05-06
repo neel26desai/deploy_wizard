@@ -211,7 +211,6 @@ class DeployEC2:
             - Generate a `requirements.txt` file based on the following libraries used in the script:
              - Also include known libraries which are not in the script but are commonly used for model inference.
             - Ensure the libraries are listed in a format suitable for `pip install`.
-            {libraries_str}
             - Python version is {self.python_version}.
             - To check which version to install refer to the" this list of all installed packages in the environment: {self.packages}"""}
         ]
