@@ -1,0 +1,4 @@
+# Ignore Terraform’s working dir and state
+AZURE_VM_DEPLOY_WIZARD/storing-terraform/.terraform/
+AZURE_VM_DEPLOY_WIZARD/storing-terraform/terraform.tfstate
+AZURE_VM_DEPLOY_WIZARD/storing-terraform/terraform.tfstate.backup
