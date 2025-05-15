@@ -48,6 +48,10 @@ class DeployAzureVM:
         # Directories
         self.inference_dir = None
         self.terraform_dir = None
+        #path to templates
+        self.template_dir = '/Users/neel/Developer/deploy_wizard/templates/azure_vm'
+        self.main_tf_template_path = os.path.join(self.template_dir,'main.tf')
+        self.vars_tf_template_path = os.path.join(self.template_dir,'variables.tf')
 
     # -----------------------------
     # 1. Inference Script Methods
@@ -202,10 +206,10 @@ Review this inference script for best practices and completeness. Return 'No cha
             system_msg = "You are an expert Terraform and Azure infrastructure specialist."
             # 1) Read in the full template (so the LLM sees the custom_data block)
             #template_main_tf = file_reader('templates_azure_vm/main.tf')
-            raw_main = file_reader('templates_azure_vm/main.tf')
+            raw_main = file_reader(self.main_tf_template_path)
             # remove any "tags = var.tags" from subnets (subnets cannot be tagged)
             template_main_tf = re.sub(r'\n\s*tags\s*=\s*var\.tags', '', raw_main)
-            template_vars_tf = file_reader('templates_azure_vm/variables.tf')
+            template_vars_tf = file_reader(self.vars_tf_template_path)
 
             # 2) Show the raw templates
             user_msg = (
@@ -291,8 +295,8 @@ Review this inference script for best practices and completeness. Return 'No cha
 
     def get_deployment_parameters(self):
         # Load your Terraform templates
-        main_tf = file_reader('templates_azure_vm/main.tf')
-        vars_tf = file_reader('templates_azure_vm/variables.tf')
+        main_tf = file_reader(self.main_tf_template_path)
+        vars_tf = file_reader(self.vars_tf_template_path)
 
         # Ask the user where to save the generated files
         self.terraform_dir = input("Enter the directory to save Terraform files: ").strip()

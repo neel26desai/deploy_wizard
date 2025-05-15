@@ -43,6 +43,9 @@ class DeployKubernetes:
         self.yaml_generator_llm = ChatOpenAI(model=large_model)
         self.inference_dir = None
         self.k8s_yaml_dir = None
+        self.k8s_template_dir = "/Users/neel/Developer/deploy_wizard/templates/k8s"
+        self.templated_deployment_path = os.path.join(self.k8s_template_dir, "deployment.yaml")
+        self.templated_service_path = os.path.join(self.k8s_template_dir, "service.yaml")
 
     def get_model_info(self):
         print("\n📦 Let's collect your model information:")
@@ -212,8 +215,8 @@ Write a complete FastAPI app that:
             "replicas": params["replicas"]
         }
 
-        deployment_yaml = self.render_template("templates/k8s/deployment.yaml", variables)
-        service_yaml = self.render_template("templates/k8s/service.yaml", variables)
+        deployment_yaml = self.render_template(self.templated_deployment_path, variables)
+        service_yaml = self.render_template(self.templated_deployment_path, variables)
 
         write_to_file(os.path.join(self.k8s_yaml_dir, 'deployment.yaml'), deployment_yaml)
         write_to_file(os.path.join(self.k8s_yaml_dir, 'service.yaml'), service_yaml)
