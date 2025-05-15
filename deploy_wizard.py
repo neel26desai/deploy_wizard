@@ -1,6 +1,7 @@
 from aws_helper.ec2_deploy_wizard import DeployEC2
 from k8s_helper.k8s_deploy_wizard import DeployKubernetes
 from aws_helper.sagemaker_endpoint import DeploySagemakerEndpoint
+from azure_helper.azure_deploy_wizard import DeployAzureVM
 
 
 if __name__=="__main__":
@@ -20,6 +21,8 @@ if __name__=="__main__":
     elif input == "2":
         print("You have selected Azure VM.")
         # Add your Azure VM deployment code here
+        azure_vm_deploy = DeployAzureVM()
+        azure_vm_deploy.deploy_azure_vm()
     elif input == "3":
         print("You have selected Kubernetes deployment.")
         k8s_deploy = DeployKubernetes()

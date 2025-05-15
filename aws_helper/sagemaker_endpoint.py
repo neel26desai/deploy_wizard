@@ -47,6 +47,11 @@ class DeploySagemakerEndpoint:
         self.terraform_dir = None
         self.terraform_critical_llm = MyOpenAI(model="gpt-4o")
         self.ecr_repo_name
+        self.template_dir = "/Users/neel/Developer/deploy_wizard/templates/aws_sagemaker_endpoint"
+        self.template_training_script_path = os.path.join(self.template_dir, "inference.py")
+        self.template_dockerfile_path = os.path.join(self.template_dir, "Dockerfile")
+        self.template_main_tf_path = os.path.join(self.template_dir, "main.tf")
+        self.template_serve_path = os.path.join(self.template_dir, "serve")
 
     def get_model_info(self):
         """Ask the user to provide model details and data shape."""
@@ -258,8 +263,7 @@ class DeploySagemakerEndpoint:
     
     #dockerization
     def generate_dockerfile(self,feedback=None):
-        docker_template_file = "/Users/neel/Developer/deploy_wizard/templates/aws_sagemaker_endpoint/Dockerfile"
-        docker_template = file_reader(docker_template_file)
+        docker_template = file_reader(self.template_dockerfile_path)
         if feedback is None:
             messages = [
                 {
@@ -445,8 +449,7 @@ class DeploySagemakerEndpoint:
         }
 
     def terraform_generator_actor(self,options, feedback=None):
-        terraform_template_file = "/Users/neel/Developer/deploy_wizard/templates/aws_sagemaker_endpoint/main.tf"
-        terraform_template = file_reader(terraform_template_file)
+        terraform_template = file_reader(self.template_main_tf_path)
         if feedback is None:
             messages = [
                 {

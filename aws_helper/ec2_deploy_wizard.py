@@ -40,6 +40,10 @@ class DeployEC2:
         self.terraform_dir = None
         self.python_version = get_python_version()
         self.packages = get_installed_packages()
+        self.template_dir = '/Users/neel/Developer/deploy_wizard/templates/aws_ec2'
+        self.main_tf_template_path = os.path.join(self.template_dir,'main.tf')
+        self.vars_tf_template_path = os.path.join(self.template_dir,'variables.tf')
+
 
     def get_model_info(self):
         """Ask the user to provide model details and data shape."""
@@ -572,8 +576,8 @@ class DeployEC2:
             print(response)
     
     def get_deployment_parameter(self):
-        base_main_tf = file_reader('/Users/neel/Developer/deploy_wizard/templates/aws_ec2/main.tf')
-        base_vars_tf = file_reader('/Users/neel/Developer/deploy_wizard/templates/aws_ec2/variables.tf')
+        base_main_tf = file_reader(self.main_tf_template_path)
+        base_vars_tf = file_reader(self.vars_tf_template_path)
 
         params = {}
         # self.terraform_dir = "/Users/neel/Developer/ec2_iris/aws_terraform"
